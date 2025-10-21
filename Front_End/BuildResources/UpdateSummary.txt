@@ -1,0 +1,75 @@
+1️⃣ Top Summary Row (Quick Insights)
+
+Cards / KPI Tiles:
+
+Total Posts – count of all posts collected
+
+Average Sentiment – score (color-coded: green = positive, yellow = neutral, red = negative)
+
+Platform Distribution – tiny donut chart or progress bars showing share of posts per platform
+
+Top Mentioned Topic – highlight the keyword that appears most
+
+These give an instant “snapshot” of the conversation.
+
+2️⃣ Middle Row: Time-based Trends
+
+A. Temporal Activity Heatmap
+
+X-axis = hour of day or day of week
+
+Y-axis = platform or sentiment category
+
+Color intensity = post volume
+
+Purpose: shows when people are most active, split by platform or sentiment
+
+B. Sentiment Over Time Line Chart
+
+X-axis = time (days/weeks)
+
+Y-axis = sentiment score or % positive/negative
+
+Lines per platform (Twitter, Instagram, YouTube)
+
+Purpose: spot shifts in mood over time
+
+Side-by-side, these two charts make the dashboard dynamic and story-driven.
+
+3️⃣ Bottom Row: Content Insights
+
+A. Keyword Trends / Word Cloud
+
+Shows most common topics: “gas prices”, “government”, “crime”, “dancehall”
+
+Optional small bar chart next to word cloud: top 5 keywords and their counts
+
+B. Platform Comparison Bar Chart
+
+X-axis = platforms
+
+Y-axis = number of posts
+
+Color = sentiment average per platform (stacked negative/neutral/positive)
+
+Purpose: compare platforms quickly in both activity and mood
+
+Optional Extra Feature (Imitative Location Insights)
+
+Extract parish mentions from text (keyword matching)
+
+Mini heatmap or bar chart: “Posts mentioning parishes”
+
+Label clearly: “Derived from text mentions only”
+
+Adds geographic flavor without misleading users
+
+💡 Interaction Ideas
+
+Hover tooltips showing exact counts or example posts
+
+Filters: by platform, sentiment, date range
+
+Clickable keywords to see posts containing that keyword
+
+This layout keeps the dashboard data-rich, visually appealing, and trustworthy even without real location data. It tells a story of activity, sentiment, and trends across time and platforms.

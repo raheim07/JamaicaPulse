@@ -1,0 +1,374 @@
+Frontend Instructions:
+
+We are building a frontend application based on the "Pulse of the Nation" project description.
+The frontend should be a React application with TailwindCSS for styling, and it should include several pages and components as described.
+
+Key Pages and Components:
+
+Home Page:
+
+Pulse Index Card: A big number showing overall national sentiment (e.g., Pulse Index 68 — “Optimistic”).
+
+Trend Graph: A line chart of national sentiment over 24 hours or 7 days.
+
+Heatmap: A map of Jamaica with parish-level mood intensity (using Mapbox).
+
+Top 5 Topics Widget: Small cards showing emotions by category.
+
+Topic Insights Page:
+
+Dropdown filter (Economy, Crime, Education, etc.)
+
+Bar/Donut chart of emotions by topic.
+
+Trend line of sentiment for that topic.
+
+Regional Pulse Page:
+
+Interactive heatmap (hover shows stats per parish).
+
+Sidebar with “Most Positive” and “Most Concerned” regions.
+
+About Page:
+
+Infographic of data pipeline.
+
+Transparency section.
+
+We are also told that the backend will be a FastAPI providing several endpoints.
+
+We are to build a frontend that can be integrated with this backend.
+
+Since the backend is in development, we will mock the data for now, but structure the code so that we can replace the mock data with API calls later.
+
+Steps:
+
+Set up a React application with React Router for the pages.
+
+Use TailwindCSS for styling.
+
+Use Chart.js or Plotly.js for charts (the document mentions both, but we can choose one; let's use Chart.js for simplicity and React-Chartjs-2 for integration).
+
+Use Mapbox for the heatmap (we'll need to set up a Mapbox account and use react-map-gl for integration).
+
+Create the following pages:
+
+Home (path: "/")
+
+Topic Insights (path: "/topics")
+
+Regional Pulse (path: "/regions")
+
+About (path: "/about")
+
+We'll create a navigation bar to switch between these pages.
+
+We'll structure the components and pages in a way that we can later replace the mock data with API calls.
+
+Let's break down the components for each page:
+
+Home Page:
+
+PulseIndexCard: A component that displays the overall national sentiment index.
+
+TrendGraph: A line chart component for the national sentiment over time.
+
+Heatmap: A Mapbox map with heatmap layer for Jamaica.
+
+TopTopics: A component that displays the top 5 topics as small cards.
+
+Topic Insights Page:
+
+TopicDropdown: A dropdown to select a topic.
+
+EmotionChart: A bar or donut chart for the selected topic's emotions.
+
+TopicTrend: A line chart for the selected topic's sentiment over time.
+
+Regional Pulse Page:
+
+RegionalHeatmap: An interactive Mapbox heatmap for Jamaica with hover effects.
+
+Sidebar: A component that lists the most positive and most concerned regions.
+
+About Page:
+
+This will be mostly static content.
+
+We'll create a services folder with files for API calls. For now, we'll mock the data.
+
+We'll use functional components and React hooks (useState, useEffect) for state and side effects.
+
+Let's create the project structure:
+
+src/
+components/
+Home/
+PulseIndexCard.js
+TrendGraph.js
+Heatmap.js (for home page, but we might reuse for regional page)
+TopTopics.js
+Topics/
+TopicDropdown.js
+EmotionChart.js
+TopicTrend.js
+Regions/
+RegionalHeatmap.js
+RegionSidebar.js
+pages/
+Home.js
+Topics.js
+Regions.js
+About.js
+services/
+api.js (will contain functions to call the backend, for now mock data)
+App.js
+index.js
+
+We'll set up React Router in App.js.
+
+We'll set up TailwindCSS following the official guide.
+
+We'll set up Chart.js and react-chartjs-2 for the charts.
+
+We'll set up Mapbox and react-map-gl for the maps.
+
+Since we are mocking data, we'll create mock data that matches the expected structure from the backend.
+
+Example of expected data structure from backend:
+
+For Pulse Index (GET /api/pulse):
+{ pulseIndex: 68, label: "Optimistic" }
+
+For Trends (GET /api/trends):
+{ data: [ { timestamp: "2025-10-18T10:00Z", sentiment: 0.65 }, ... ] }
+
+For Topics (GET /api/topics):
+{ topics: [ { topic: "crime", positive: 0.25, negative: 0.65, neutral: 0.10 }, ... ] }
+
+For Regions (GET /api/regions):
+{ regions: [ { region: "Kingston", positive: 0.25, negative: 0.65, neutral: 0.10 }, ... ] }
+
+We'll create mock data for each of these.
+
+-------------------------------------------------------------------------------------------------
+
+1. Project Setup & Structure
+
+Create a React application with the following structure:
+pulse-of-the-nation/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── dashboard/
+│   │   ├── charts/
+│   │   ├── maps/
+│   │   └── common/
+│   ├── pages/
+│   ├── services/
+│   ├── styles/
+│   └── utils/
+├── package.json
+└── README.md
+
+2. Technology Stack Implementation
+
+{
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "tailwindcss": "^3.3.0",
+    "chart.js": "^4.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "mapbox-gl": "^2.15.0",
+    "react-map-gl": "^7.1.0",
+    "axios": "^1.4.0",
+    "plotly.js": "^2.24.0",
+    "react-plotly.js": "^2.6.0"
+  }
+}
+
+3. Core Components to Build
+
+Navigation & Layout
+
+// Create a responsive navigation component with:
+// - Logo/branding "Pulse of the Nation"
+// - Navigation links: Home, Topics, Regions, About
+// - Mobile hamburger menu
+// - Consistent header across all pages
+
+Home Page Components
+
+// PulseIndexCard - Large display showing overall sentiment (68 - "Optimistic")
+// TrendGraph - Line chart showing sentiment over 7 days
+// JamaicaHeatmap - Interactive Mapbox map of Jamaica with parish-level data
+// TopTopicsWidget - 5 cards showing trending topics with sentiment indicators
+
+Topic Insights Page
+
+// TopicDropdown - Filter by Economy, Crime, Education, etc.
+// EmotionChart - Bar/Donut chart showing emotion distribution
+// TopicTrendLine - Sentiment trend for selected topic over time
+
+Regional Pulse Page
+
+// InteractiveHeatmap - Detailed Jamaica map with hover effects
+// RegionSidebar - Shows "Most Positive" and "Most Concerned" parishes
+// ParishStats - Detailed statistics when parish is clicked
+
+About Page
+
+// PipelineInfographic - Visual representation of data flow
+// TransparencySection - Explains data privacy and methodology
+// EthicsDisclaimer - "This dashboard analyzes public data for research..."
+
+4. API Integration Layer
+
+// Create in src/services/api.js
+const API_BASE_URL = 'http://localhost:8000/api'; // Adjust based on backend
+
+export const apiService = {
+  getPulse: () => axios.get(`${API_BASE_URL}/pulse`),
+  getTopics: () => axios.get(`${API_BASE_URL}/topics`),
+  getRegions: () => axios.get(`${API_BASE_URL}/regions`),
+  getTrends: (days = 7) => axios.get(`${API_BASE_URL}/trends?days=${days}`),
+  getTopicDetails: (topic) => axios.get(`${API_BASE_URL}/topics/${topic}`)
+};
+
+5. Mock Data Structure (For Development)
+
+// Use this structure until backend is ready
+const mockData = {
+  pulse: {
+    index: 68,
+    label: "Optimistic",
+    trend: "up",
+    lastUpdated: "2025-10-18T10:00Z"
+  },
+  trends: [
+    { date: "2025-10-12", sentiment: 62 },
+    { date: "2025-10-13", sentiment: 65 },
+    { date: "2025-10-14", sentiment: 59 },
+    { date: "2025-10-15", sentiment: 68 },
+    { date: "2025-10-16", sentiment: 71 },
+    { date: "2025-10-17", sentiment: 67 },
+    { date: "2025-10-18", sentiment: 68 }
+  ],
+  topics: [
+    { name: "Education", positive: 0.45, negative: 0.25, neutral: 0.30 },
+    { name: "Crime", positive: 0.15, negative: 0.70, neutral: 0.15 },
+    { name: "Economy", positive: 0.30, negative: 0.50, neutral: 0.20 },
+    { name: "Healthcare", positive: 0.40, negative: 0.35, neutral: 0.25 },
+    { name: "Transport", positive: 0.25, negative: 0.60, neutral: 0.15 }
+  ],
+  regions: [
+    { parish: "Kingston", positive: 0.35, negative: 0.45, neutral: 0.20 },
+    { parish: "St. Andrew", positive: 0.40, negative: 0.35, neutral: 0.25 },
+    { parish: "St. Catherine", positive: 0.30, negative: 0.50, neutral: 0.20 },
+    // ... all 14 parishes
+  ]
+};
+
+6. Styling & Design System
+
+Use TailwindCSS with a sleek and modern looking theme 
+
+7. Key Features to Implement
+
+Real-time Updates
+
+// Implement WebSocket or polling for live data updates
+useEffect(() => {
+  const interval = setInterval(() => {
+    fetchLatestData();
+  }, 300000); // Update every 5 minutes
+  return () => clearInterval(interval);
+}, []);
+
+Responsive Design
+-Mobile-first approach
+
+-Breakpoints for tablet and desktop
+
+-Collapsible sidebar for mobile
+
+Interactive Elements
+-Hover tooltips on charts and maps
+
+-Click handlers for detailed views
+
+-Smooth transitions and animations
+
+8. Integration Readiness
+
+Environment Configuration
+
+// src/config.js
+export const config = {
+  apiBaseUrl: process.env.REACT_APP_API_URL || 'http://localhost:8000',
+  mapboxToken: process.env.REACT_APP_MAPBOX_TOKEN,
+  updateInterval: process.env.REACT_APP_UPDATE_INTERVAL || 300000
+};
+
+Error Handling
+
+// Implement comprehensive error handling for:
+// - API connection failures
+// - Data parsing errors
+// - Map loading issues
+// - Network timeouts
+
+9. Deployment Instructions
+
+# Build command
+npm run build
+
+# Deployment to Vercel/Netlify
+# Connect GitHub repo to Vercel/Netlify
+# Set environment variables:
+# REACT_APP_API_URL, REACT_APP_MAPBOX_TOKEN
+
+10. Testing Strategy
+
+// Test components with:
+// - Mock API responses
+// - Different screen sizes
+// - Loading and error states
+// - User interactions
+
+Visual Design Requirements
+-Color Scheme: Modern and sleek
+
+-Typography: Clean, modern fonts (Inter or Poppins)
+
+-Icons: Consistent icon set for emotions and categories
+
+-Charts: Clear, accessible data visualizations with proper legends
+
+-Maps: Jamaica-focused with clear parish boundaries and heatmap gradients
+
+Backend Integration Points
+The frontend expects these API endpoints:
+
+GET /api/pulse - Overall sentiment index
+
+GET /api/topics - Trending topics with sentiment
+
+GET /api/regions - Parish-level sentiment data
+
+GET /api/trends - Historical sentiment data
+
+
+The frontend is designed to gracefully handle:
+
+-Backend development phase (using mock data)
+
+-API version changes
+
+-Partial data availability
+
+-Rate limiting
+
+This setup will create a fully functional frontend that can immediately integrate with the FastAPI backend once it's developed, while providing a realistic preview during the development phase.
